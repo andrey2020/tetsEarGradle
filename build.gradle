@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'ear'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies{
+    compile 'javax:javaee-api:6.0'
+}
+
+dependencies {
+    deploy project(path:':ServiceTest-ejb', configuration:'archives')
+    earlib group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+    earlib group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+}
+
+//ear {
+//    deploymentDescriptor { 
+////        webModule(project(":my-war").war.archiveName, "customContextPath")
+//        module(':ServiceTest-ejb', 'java')
+//    }
+//}
+

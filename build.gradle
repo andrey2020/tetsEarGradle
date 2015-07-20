@@ -1,5 +1,12 @@
+plugins {
+  id "com.bmuschko.cargo" version "2.1"
+}
+
 apply plugin: 'java'
 apply plugin: 'ear'
+
+sourceCompatibility = '1.6'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
     mavenCentral()
@@ -14,6 +21,22 @@ dependencies {
     earlib group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
     earlib group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
 }
+
+cargo {
+
+    containerId = 'jboss42x'
+    //cargo.jboss.classloading.webservice.port = 8888
+    local {
+        homeDir = file('/home/andrey/NetBeansProjects/DEV/jboss-4.2.3.GA')
+    }
+    
+    deployable {
+        file = file('/home/andrey/NetBeansProjects/ServiceTestGradle/build/libs/ServiceTestGradle.ear')
+        //context = 'ServiceTestGradle.ear'
+    }
+}
+
+
 
 //ear {
 //    deploymentDescriptor { 
